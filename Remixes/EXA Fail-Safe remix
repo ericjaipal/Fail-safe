@@ -135,37 +135,38 @@ const breaks =  s("breaks165").gain(0.5).loopAt(1).chop(16).fit().o(2).jux(rev)
 const fx = s("fx").struct("- x".fast(4)).gain(2).end(0.5)
 
 
-const lead = note("<e4 d4 a3 e3 d3 b2>".fast(16)).sound("[square, supersaw]")//.trans(12)
+const lead = note("<Eb4 D4 Ab3 Eb3 d3 Bb2>".fast(16)).sound("[square, supersaw]")//.trans(12)
 .sometimes(trans("<12>")).almostNever(mask(0)).rib(4,8)
   .detune(1).unison(10)
   .orbit(2).room(1).lpf(4556).decay(0.1).postgain(0.5)
 
-const bassline = note("<[g2,c3] [b2,e3]>".almostNever(x=>x.trans("12")))
+const bassline = note("<[Bb2,Eb3] [g2,c3] >".almostNever(x=>x.trans("12")))
   .trans("0").slow(1).s("supersaw,square").seg(8).hpf(150).dec(.25)//.room(.75)
   .postgain(.3).rib(2,1000)
 
-const chops = s("CHOPS").clip(1).note("d#1").postgain(0.6)//.trans(5)
-  .jux(rev).room(0.5).delay(1).lpf(slider(3000, 300, 3000))
-.slice(16, "[0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15]".fast(4)).ply(2).o(2)
+const chops = s("CHOPS").clip(1).postgain(0.6)//.trans(5)
+  .jux(rev).room(0.5).delay(1).lpf(slider(3000, 300, 3000)).note("f#1")
+.slice(16, "[0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15]".fast(4)).ply(2).rib(9,136).o(2)
 
-const chops2 = s("GANG_VOX").loopAt(8)
-  .slice(16, "<[2|6|8|9|10|12|13|14|15] <[14] [2]>>".fast(1).ply("<[8|16] [2]>")).rib(2,10000).note("g1")  
+const chops2 = s("GANG_VOX").loopAt(9.3235)
+  .slice(16, "<[2|6|8|9|10|12|13|14|15] <[14] [12]>>".fast(1).ply("<[8|16] [2]>")).rib(2,10000).note("<[25][31.75]>")  
   .chop(16).clip(1).o(2).postgain("<[1][2]>")
   
 const bg_vox = s("BG_VOX").loopAt(8).chop(4).clip(1).note("g1").o(2).postgain(1)
 
 const gang = s("GANG_VOX").loopAt(8).chop(16).clip(1).o(2).postgain(1.5)
 
-const verse1 = s("VERSE1").loopAt(16).slice(2, "1 0".slow(16))//.early(0.1)
-  .note("d2").chop(16).clip(1)
+const verse1 = s("VERSE1").loopAt(18.13685).slice(2, "1 0".slow(16))//.early(0.1)
+  // .note("c2")
+  .chop(16).clip(1)
   .o(2).postgain(1)
 
-const verse2 = s("VERSE2").loopAt(16).slice(2, "0 1".slow(16)).note("d2").chop(16).clip(1).o(2).postgain(1)
+const verse2 = s("VERSE2").loopAt(18.13685).slice(2, "0 1".slow(16)).chop(16).clip(1).o(2).postgain(1)
 
 
 // /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 
-S$: blockArrange(
+$: blockArrange(
   [ 
     [[kick],       "<0@8         A@8 A@8 0@8 0@8 0@0.25 A@7.75 A@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8        A@8 C@8 C@8 C@8 0@8 0@8>"],
     [[clap],       "<0@8         0@8 0@8 0@8 1@8 0@0.25 1@7.75 1@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8        1@8 1@8 0@8 0@8 0@8 0@8>"],
@@ -174,10 +175,10 @@ S$: blockArrange(
     [[fx],         "<0@8         0@8 0@8 0@8 0@8 1@0.25 0@7.75 0@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8        0@7.5 1@0.5 0@8 0@8 0@8 0@8 0@8>"],
     
     
-    [[lead],       "<1@8         0@8 1@8 0@8 W@8 0@0.25 X@7.75 Z@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8         0@8 1@8 1@8 Y@8 0@8 0@8>"],
+    [[lead],       "<1@8         0@8 1@8 0@8 W@8 0@0.25 X@7.75 Z@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8         0@8 1@8 1@8 Y@4 Z@2 1@2 0@8 0@8>"],
     [[bg_vox],     "<0@8         0@8 0@8 0@8 0@8 0@0.25 0@7.75 0@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8         0@8 0@8 0@8 0@8 0@8 0@8>"],
-    [[chops],      "<0 0@3 S 0@3 0@8 0@8 0@8 0@8 0@0.25 0@7.75 0@8 S@8 0@8 0@7.5 0@0.5 0@8 0@8         0@8 0@8 0@8 0@8 0@8 0@8>"],
-    [[chops2],     "<0@8         1@8 1@8 0@8 0@8 0@0.25 1@7.75 1@8 0@8 0@8 0@7.5 0@0.5 H@4 I@4 J@4 L@4 1@8 1@8 1@8 1@8 0@8 0@8>"],
+    [[chops],      "<0 0@3 S 0@1 S 0@1 0@8 0@8 0@8 0@8 0@0.25 0@7.75 0@8 S@8 0@8 0@7.5 0@0.5 0@8 0@8         0@8 0@8 0@8 0@8 0@8 0@8>"],
+    [[chops2],     "<0@8         1@8 1@8 0@8 0@8 0@0.25 1@7.75 1@8 0@8 0@8 0@7.5 0@0.5 H@4 I@4 J@4 L@4 1@8 1@8 1@8 1@8 0@7.5 W@0.5 0@8>"],
     [[verse1],     "<0@8         0@8 0@8 1@8 1@8 0@0.25 0@7.75 0@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8         0@8 0@8 0@8 0@8 0@8 0@8>"],
     [[verse2],     "<0@8         0@8 0@8 0@8 0@8 0@0.25 0@7.75 0@8 0@8 1@8 1@7.5 0@0.5 0@8 0@8         0@8 0@8 0@8 0@8 0@8 0@8>"],
     [[gang],       "<0@8         0@8 0@8 0@8 0@8 0@0.25 0@7.75 0@8 0@8 0@8 0@7.5 0@0.5 0@8 0@8         0@8 0@8 0@8 0@8 0@8 0@8>"],
@@ -204,7 +205,7 @@ S$: blockArrange(
    [(m) => m.includes('M') , (x) => x.lpf(500).room(.75)],
   ]
 ) 
-// .rib(126,8000)
+// .rib(8,8)
 // ^ this is the whole song structure  
 
 .color("#10516b")
@@ -215,7 +216,6 @@ S$: blockArrange(
 // ^comment this out if you want to change the theme, then you can change it in settings
 
 // /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-
 
 
 // all(x=>x.room(mouseX.segment(4).range(0,2)).hpf(mouseX.segment(3).range(0,1000)))
